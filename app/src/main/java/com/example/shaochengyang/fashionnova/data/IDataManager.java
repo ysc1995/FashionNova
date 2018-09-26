@@ -1,11 +1,10 @@
 package com.example.shaochengyang.fashionnova.data;
 
-import android.widget.ImageView;
-
 import com.example.shaochengyang.fashionnova.data.database.IDbHelper;
 import com.example.shaochengyang.fashionnova.data.database.model.ShoppingCartObject;
 import com.example.shaochengyang.fashionnova.data.network.INetworkHelper;
 import com.example.shaochengyang.fashionnova.data.network.model.Collection;
+import com.example.shaochengyang.fashionnova.data.network.model.OrderHistoryObject;
 import com.example.shaochengyang.fashionnova.data.network.model.ProductListObj;
 import com.example.shaochengyang.fashionnova.data.network.model.SubCategory;
 
@@ -29,7 +28,7 @@ public interface IDataManager extends INetworkHelper, IDbHelper {
 
     interface onLoginListener{
 
-        void passAPIKey(String appapikey, String id);
+        void passAPIKey(String appapikey, String id, String firstname, String email, String mobile);
     }
 
     interface onSignUpListener{
@@ -37,9 +36,23 @@ public interface IDataManager extends INetworkHelper, IDbHelper {
         void getSignUpResult(String result);
     }
 
+    interface onCheckOutListener{
+
+        void showResult();
+    }
+
+    interface onOrderHistoryListener{
+
+        void passOrderHistory(List<OrderHistoryObject> orderList);
+    }
+
     interface onDatabaseListener{
 
         void passShoppingCart(List<ShoppingCartObject> scList);
+
+        void passDeletedShoppingCart(List<ShoppingCartObject> scList);
+
+        void passProductInfo(String pid, String pname, String quantity, String prize);
     }
 
 }

@@ -23,6 +23,7 @@ import com.example.shaochengyang.fashionnova.ui.category.CollectionPresenter;
 import com.example.shaochengyang.fashionnova.ui.category.ICollectionPresenter;
 import com.example.shaochengyang.fashionnova.ui.category.ICollectionView;
 import com.example.shaochengyang.fashionnova.ui.login.LoginActivity;
+import com.example.shaochengyang.fashionnova.ui.myorder.MyOrderActivity;
 import com.example.shaochengyang.fashionnova.ui.shoppingcart.ShoppingCartActivity;
 
 import java.util.List;
@@ -122,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.myorder) {
+            Intent i = new Intent(MainActivity.this, MyOrderActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.myfavorites) {
 

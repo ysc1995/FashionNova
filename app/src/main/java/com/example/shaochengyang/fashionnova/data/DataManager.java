@@ -42,6 +42,16 @@ public class DataManager implements IDataManager {
         networkHelper.signUp(onSignUpListener,fname,lname,address,password,email,mobile);
     }
 
+    @Override
+    public void checkout(onCheckOutListener onCheckOutListener, String pid, String pname, String quantity, String prize, String api_key, String user_id, String phone, String firstname, String email, String billingadd, String deliveryadd) {
+        networkHelper.checkout(onCheckOutListener,pid,pname,quantity,prize,api_key,user_id,phone,firstname,email,billingadd,deliveryadd);
+    }
+
+    @Override
+    public void getOrderHistory(onOrderHistoryListener onOrderHistoryListener, String api_key, String user_id, String mobile) {
+        networkHelper.getOrderHistory(onOrderHistoryListener, api_key,user_id,mobile);
+    }
+
 
     @Override
     public void createRow(IDataManager.onDatabaseListener onDatabaseListener, String pid, String pname, String userQuantity, String prize) {
@@ -51,5 +61,15 @@ public class DataManager implements IDataManager {
     @Override
     public void readALL(onDatabaseListener onDatabaseListener) {
         dbHelper.readALL(onDatabaseListener);
+    }
+
+    @Override
+    public void deleteRow(onDatabaseListener onDatabaseListener, String pid) {
+        dbHelper.deleteRow(onDatabaseListener,pid);
+    }
+
+    @Override
+    public void getProductInfo(onDatabaseListener onDatabaseListener) {
+        dbHelper.getProductInfo(onDatabaseListener);
     }
 }

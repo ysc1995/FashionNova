@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.shaochengyang.fashionnova.AppController;
 import com.example.shaochengyang.fashionnova.data.IDataManager;
 import com.example.shaochengyang.fashionnova.data.network.model.Collection;
+import com.example.shaochengyang.fashionnova.data.network.model.OrderHistoryObject;
 import com.example.shaochengyang.fashionnova.data.network.model.ProductListObj;
 import com.example.shaochengyang.fashionnova.data.network.model.SubCategory;
 import com.example.shaochengyang.fashionnova.util.Constant;
@@ -25,7 +26,7 @@ import java.util.List;
 
 
 public class NetworkHelper implements INetworkHelper {
-
+    List<OrderHistoryObject> orderList;
     List<Collection> collectionList ;
     List<SubCategory> subCategoryList;
     List<ProductListObj> productList;
@@ -174,9 +175,12 @@ public class NetworkHelper implements INetworkHelper {
                     JSONObject jsonObject = response.getJSONObject(0);
 
                     String appapikey = jsonObject.getString("appapikey ");
+                    String firstname = jsonObject.getString("firstname");
+                    String email = jsonObject.getString("email");
+                    String mobile = jsonObject.getString("mobile");
                     String id = jsonObject.getString("id");
 
-                    onLoginListener.passAPIKey(appapikey,id);
+                    onLoginListener.passAPIKey(appapikey,id,firstname,email,mobile);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -206,6 +210,70 @@ public class NetworkHelper implements INetworkHelper {
             }
         });
         AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
+    @Override
+    public void checkout(final IDataManager.onCheckOutListener onCheckOutListener, String pid, String pname, String quantity, String prize, String api_key, String user_id, String phone, String firstname, String email, String billingadd, String deliveryadd) {
+
+        String URL = Constant.URL_CHECKOUT + "?&item_id="+pid+"&item_names="+pname+"&item_quantity="+quantity+"&final_price="+prize+"&&api_key="+api_key+"&user_id="+user_id+"&user_name="+firstname+"&billingadd="+billingadd+"&deliveryadd="+deliveryadd+"&mobile="+phone+"&email="+email;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                onCheckOutListener.showResult();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+    }
+
+    @Override
+    public void getOrderHistory(final IDataManager.onOrderHistoryListener onOrderHistoryListener, String api_key, String user_id, String mobile) {
+        String URL = Constant.URL_ORDERHISTORY+"?api_key="+api_key+"&user_id="+user_id+"&mobile="+mobile;
+        orderList = new ArrayList<OrderHistoryObject>();
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("Order history");
+                    for (int i = 0 ; i < jsonArray.length(); i++){
+                        JSONObject productlistobj = jsonArray.getJSONObject(i);
+                        String orderid = productlistobj.getString("orderid");
+                        String orderstatus = productlistobj.getString("orderstatus");
+                        String name = productlistobj.getString("name");
+                        String billingadd = productlistobj.getString("billingadd");
+                        String deliveradd = productlistobj.getString("deliveryadd");
+                        String mobile = productlistobj.getString("mobile");
+                        String email = productlistobj.getString("email");
+                        String itemid = productlistobj.getString("itemid");
+                        String itemname = productlistobj.getString("itemname");
+                        String itemquantity = productlistobj.getString("itemquantity");
+                        String totalprice = productlistobj.getString("totalprice");
+                        String paidprice = productlistobj.getString("paidprice");
+                        String placedon = productlistobj.getString("placedon");
+
+                        OrderHistoryObject orderHistoryObject = new OrderHistoryObject( orderid,  orderstatus,  name,  billingadd,  deliveradd,  mobile,  email,  itemid,  itemname,  itemquantity,  totalprice,  paidprice,  placedon);
+                        orderList.add(orderHistoryObject);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                onOrderHistoryListener.passOrderHistory(orderList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+
     }
 
 
