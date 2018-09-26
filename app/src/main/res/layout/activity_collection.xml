@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.collection.CollectionActivity">
+    tools:context=".ui.category.CollectionActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/collectionrecyclerview"
@@ -14,4 +14,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="53dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="186dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/userQuantityText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/shoppingcartView"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_shopping_cart"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/icon_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_media_previous" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

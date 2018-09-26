@@ -1,4 +1,4 @@
-package com.example.shaochengyang.fashionnova.ui.collection;
+package com.example.shaochengyang.fashionnova.ui.category;
 
 import com.example.shaochengyang.fashionnova.data.network.model.Collection;
 

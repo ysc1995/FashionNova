@@ -1,4 +1,6 @@
-package com.example.shaochengyang.fashionnova.ui.collection;
+package com.example.shaochengyang.fashionnova.ui.category;
+
+import android.content.Context;
 
 import com.example.shaochengyang.fashionnova.data.DataManager;
 import com.example.shaochengyang.fashionnova.data.IDataManager;
@@ -10,14 +12,14 @@ public class CollectionPresenter implements ICollectionPresenter, IDataManager.O
     ICollectionView view;
     IDataManager dataManager;
 
-    public CollectionPresenter(CollectionActivity collectionActivity) {
-        dataManager = new DataManager(collectionActivity);
-        view = collectionActivity;
+    public CollectionPresenter(Context context) {
+        dataManager = new DataManager(context);
+        view = (ICollectionView) context;
     }
 
     @Override
-    public void readCollectionFromServer() {
-        dataManager.getCollection(this);
+    public void readCollectionFromServer(String api_key, String user_id) {
+        dataManager.getCollection(this,api_key,user_id);
 
     }
 

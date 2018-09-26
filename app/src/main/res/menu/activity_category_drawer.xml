@@ -4,34 +4,34 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
+        <!--<item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Import" />-->
         <item
             android:id="@+id/collection"
             android:icon="@drawable/ic_menu_gallery"
             android:title="COLLECTION" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/shoppingcart"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="SHOPPING CART" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/myorder"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="MY ORDER" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/myfavorites"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="MY FAVORITES" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/login"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="My Account" />
         </menu>
     </item>
 
