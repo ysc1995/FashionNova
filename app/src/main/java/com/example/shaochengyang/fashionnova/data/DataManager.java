@@ -52,6 +52,11 @@ public class DataManager implements IDataManager {
         networkHelper.getOrderHistory(onOrderHistoryListener, api_key,user_id,mobile);
     }
 
+    @Override
+    public void getTopSeller(onTopSellerListener onTopSellerListener) {
+        networkHelper.getTopSeller(onTopSellerListener);
+    }
+
 
     @Override
     public void createRow(IDataManager.onDatabaseListener onDatabaseListener, String pid, String pname, String userQuantity, String prize) {

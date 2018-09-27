@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.category.CollectionActivity">
+    tools:context=".ui.category.CollectionActivity"
+    tools:layout_editor_absoluteY="50dp">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/collectionrecyclerview"
@@ -16,28 +17,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="53dp"
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="186dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/userQuantityText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="243dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/shoppingcartView"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_shopping_cart"
             tools:ignore="VectorDrawableCompat" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="@+id/collectionrecyclerview">
 
         <ImageView
             android:id="@+id/icon_back"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:srcCompat="@android:drawable/ic_media_previous" />
+
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

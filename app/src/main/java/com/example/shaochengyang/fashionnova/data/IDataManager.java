@@ -6,6 +6,7 @@ import com.example.shaochengyang.fashionnova.data.network.INetworkHelper;
 import com.example.shaochengyang.fashionnova.data.network.model.Collection;
 import com.example.shaochengyang.fashionnova.data.network.model.OrderHistoryObject;
 import com.example.shaochengyang.fashionnova.data.network.model.ProductListObj;
+import com.example.shaochengyang.fashionnova.data.network.model.Seller;
 import com.example.shaochengyang.fashionnova.data.network.model.SubCategory;
 
 import java.util.List;
@@ -46,6 +47,10 @@ public interface IDataManager extends INetworkHelper, IDbHelper {
         void passOrderHistory(List<OrderHistoryObject> orderList);
     }
 
+    interface onTopSellerListener{
+
+        void passSellers(List<Seller> sellerList);
+    }
     interface onDatabaseListener{
 
         void passShoppingCart(List<ShoppingCartObject> scList);

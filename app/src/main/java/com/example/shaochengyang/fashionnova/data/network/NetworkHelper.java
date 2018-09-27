@@ -14,6 +14,7 @@ import com.example.shaochengyang.fashionnova.data.IDataManager;
 import com.example.shaochengyang.fashionnova.data.network.model.Collection;
 import com.example.shaochengyang.fashionnova.data.network.model.OrderHistoryObject;
 import com.example.shaochengyang.fashionnova.data.network.model.ProductListObj;
+import com.example.shaochengyang.fashionnova.data.network.model.Seller;
 import com.example.shaochengyang.fashionnova.data.network.model.SubCategory;
 import com.example.shaochengyang.fashionnova.di.CollectionModule;
 import com.example.shaochengyang.fashionnova.di.DaggerMyComponent;
@@ -42,6 +43,7 @@ public class NetworkHelper implements INetworkHelper {
     List<Collection> collectionList ;
     List<SubCategory> subCategoryList;
     List<ProductListObj> productList;
+    List<Seller> sellerList;
     private static final String TAG = "NetworkHelper";
     //Todo create a static url in a constant class
     //private String urlCollection = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key=5ec23161979dd69909960de49e6db800&user_id=1384";
@@ -308,6 +310,44 @@ public class NetworkHelper implements INetworkHelper {
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    @Override
+    public void getTopSeller(final IDataManager.onTopSellerListener onTopSellerListener) {
+        String URL = "http://rjtmobile.com/aamir/e-commerce/android-app/shop_top_sellers.php?";
+        sellerList = new ArrayList<Seller>();
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("Top sellers");
+                    for (int i = 0 ; i < jsonArray.length(); i++){
+                        JSONObject productlistobj = jsonArray.getJSONObject(i);
+                        String id = productlistobj.getString("id");
+                        String sellername = productlistobj.getString("sellername");
+                        String sellerdeal = productlistobj.getString("sellerdeal");
+                        String sellerrating = productlistobj.getString("sellerrating");
+                        String sellerlogo = productlistobj.getString("sellerlogo");
+
+
+                        Seller seller = new Seller( id,sellername,sellerdeal,sellerrating,sellerlogo);
+                        sellerList.add(seller);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                onTopSellerListener.passSellers(sellerList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+
 
     }
 

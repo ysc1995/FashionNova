@@ -27,7 +27,7 @@
             <item
                 android:id="@+id/myfavorites"
                 android:icon="@drawable/ic_menu_share"
-                android:title="MY FAVORITES" />
+                android:title="TOP SELLERS" />
             <item
                 android:id="@+id/login"
                 android:icon="@drawable/ic_menu_send"
