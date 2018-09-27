@@ -3,6 +3,10 @@ package com.example.shaochengyang.fashionnova.data.network.model;
 public class Collection {
     String cid, cname, cdiscription, cimagerl;
 
+    public Collection(){
+
+    }
+
     public Collection(String cid, String cname, String cdiscription, String cimagerl) {
         this.cid = cid;
         this.cname = cname;

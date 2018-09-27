@@ -15,6 +15,9 @@ import com.example.shaochengyang.fashionnova.data.network.model.Collection;
 import com.example.shaochengyang.fashionnova.data.network.model.OrderHistoryObject;
 import com.example.shaochengyang.fashionnova.data.network.model.ProductListObj;
 import com.example.shaochengyang.fashionnova.data.network.model.SubCategory;
+import com.example.shaochengyang.fashionnova.di.CollectionModule;
+import com.example.shaochengyang.fashionnova.di.DaggerMyComponent;
+import com.example.shaochengyang.fashionnova.di.MyComponent;
 import com.example.shaochengyang.fashionnova.util.Constant;
 
 import org.json.JSONArray;
@@ -24,8 +27,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class NetworkHelper implements INetworkHelper {
+    @Inject
+    Collection collection;
+
+    MyComponent component;
+
+
+
     List<OrderHistoryObject> orderList;
     List<Collection> collectionList ;
     List<SubCategory> subCategoryList;
@@ -36,6 +48,15 @@ public class NetworkHelper implements INetworkHelper {
     //private String urlSubCategory = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_sub_category.php?Id=107&api_key=dad3b9d91e34282e4d4a9a3309e04441&user_id=1384";
     private String url = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_sub_category.php";
 
+
+   /* public NetworkHelper(){
+        component = DaggerMyComponent
+                .builder()
+                .collectionModule(new CollectionModule())
+                .build();
+        component.inject(this);
+    }
+*/
     @Override
     public void getCollection(final IDataManager.OnCollectionListener onCollectionListener, final String api_key, final String user_id) {
         // perform the volley n/w call
@@ -62,7 +83,21 @@ public class NetworkHelper implements INetworkHelper {
 
                         //Log.d(TAG, "onResponse: "+cid+cname+cdiscription+cimagerl);
 
-                        Collection collection = new Collection(cid, cname, cdiscription, cimagerl);
+                        /*Collection collection = new Collection(cid, cname, cdiscription, cimagerl);
+                        collectionList.add(collection);*/
+
+                        component = DaggerMyComponent
+                                .builder()
+                                .collectionModule(new CollectionModule())
+                                .build();
+                        component.inject(NetworkHelper.this);
+
+
+                        collection.setCdiscription(cdiscription);
+                        collection.setCid(cid);
+                        collection.setCname(cname);
+                        collection.setCimagerl(cimagerl);
+
                         collectionList.add(collection);
 
                     }
@@ -75,7 +110,7 @@ public class NetworkHelper implements INetworkHelper {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                error.printStackTrace();
             }
         });
 

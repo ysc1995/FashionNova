@@ -30,4 +30,18 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0-rc02'
     implementation 'com.android.support:cardview-v7:28.0.0-rc02'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //dagger
+    implementation 'com.google.dagger:dagger:2.10'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+    // butter knife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //espresso
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
+    //paypal
+    implementation 'com.simplify:simplify-android:3.0.0'
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.shaochengyang.fashionnova.R;
 import com.example.shaochengyang.fashionnova.data.network.model.Collection;
+import com.example.shaochengyang.fashionnova.ui.main.MainActivity;
 import com.example.shaochengyang.fashionnova.ui.product.ProductActivity;
 import com.example.shaochengyang.fashionnova.ui.shoppingcart.ShoppingCartActivity;
 import com.example.shaochengyang.fashionnova.ui.subcategory.SubCategoryActivity;
@@ -55,7 +56,8 @@ public class CollectionActivity extends AppCompatActivity implements ICollection
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent i = new Intent(CollectionActivity.this, MainActivity.class);
+                startActivity(i);
             }
         });
 
